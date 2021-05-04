@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">SEARCH FOR BADGE</ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  
+  <div padding style="margin-top: 150px;">
+    <ion-card style="background-color: white;">
+      <ion-card-content>
+        <ion-text style="text-align: center; margin-top: 50px; margin-bottom: 60px; font-size: 20px; color: #2f32a0;">Search for Company ID:</ion-text>
+
+        <form [formGroup]="companyIdForm" (ngSubmit)="getBadge()">
+
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              Company ID
+            </ion-label>
+            <ion-input color="primary" type="text" formControlName="employee_id" required></ion-input>
+          </ion-item>
+      
+            <ion-col no-padding>
+              <ion-button type="submit" [disabled]="!companyIdForm.valid" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 40px;" icon-start>
+                SEARCH
+              </ion-button>
+            </ion-col>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<popmenu></popmenu>

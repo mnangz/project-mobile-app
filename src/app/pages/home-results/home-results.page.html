@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">ZIMPLATS</ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="staff || questionnaire">
+  <div style="text-align: center;">
+    <img src="./../../../assets/img/zimplatslogo.png" style="height: 80px; margin-top: 50px;">
+  </div>
+
+  <div class="wrap" style="height: 70%; flex-direction: column;" *ngIf="staff.isNurse && !staff.isEntrance && !staff.isEmployee">
+    <ion-text style="text-align: center; margin-bottom: 30px; font-size: 15px;">Screening Point: {{staff.location}}</ion-text>
+    <ion-card>
+      <ion-card-content style="background-color: white;">
+        <ion-text style="text-align: center; margin-bottom: 60px; font-size: 17px;">Welcome Zimplats Health Professional – {{staff.username}}</ion-text>
+        <div>
+    
+          <div style="margin-top: 50px;">
+            <ion-button size="medium" expand="full" shape="round" color="primary" (click)="scanCode()" tappable>
+              SCAN BADGE
+            </ion-button>
+          </div>
+    
+          <div style="margin-top: 20px;">
+            <ion-button size="medium" expand="full" shape="round" color="primary" (click)="scanQ()" tappable>
+              SCAN QUESTIONNAIRE
+            </ion-button>
+          </div>
+    
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+  
+  <div class="wrap" style="height: 70%; flex-direction: column;" *ngIf="staff.isEntrance && !staff.isNurse && !staff.isEmployee">
+    <ion-text style="text-align: center; margin-bottom: 30px; font-size: 15px;">Screening Point: {{staff.location}}</ion-text>
+    <ion-text style="text-align: center; margin-bottom: 60px; font-size: 17px;">Welcome Zimplats Security Officer – {{staff.username}}</ion-text>
+    <button class="htbutton" (click)="scanCode()">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-icon name="md-barcode" slot="middle" size="large"></ion-icon><br><br>
+      <span>Scan badge</span>
+   </button>
+   <ion-text style="margin-top: 25px; font-size: 14px;">Please ensure camera lens is clean</ion-text>
+  </div>
+
+  <div class="wrap" style="height: 70%; flex-direction: column;" *ngIf="staff.isEmployee && !staff.isNurse && !staff.isEntrance">
+    <ion-text style="text-align: center; margin-bottom: 30px; font-size: 15px;">Screening Point: {{staff.location}}</ion-text>
+    <ion-text style="text-align: center; font-size: 17px;">Welcome Zimplats Employee – {{staff.username}}</ion-text>
+    <ion-text style="text-align: center; margin-top: 20px; margin-bottom: 60px; font-size: 22px;" *ngIf="questionnaire.length == 0">Questionnaire is <strong> AVAILABLE</strong></ion-text>
+    <ion-text style="text-align: center; margin-top: 20px; margin-bottom: 60px; font-size: 22px;" *ngIf="questionnaire.length > 0">Questionnaire is <strong> NOT AVAILABLE</strong></ion-text>
+    <button class="htbutton" (click)="fillIn()" *ngIf="questionnaire.length == 0">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-icon name="list" slot="middle" size="large"></ion-icon><br><br>
+      <span>Start</span>
+   </button>
+   <button class="htbutton" (click)="fillIn()" disabled *ngIf="questionnaire.length > 0">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="list" slot="middle" size="large"></ion-icon><br><br>
+    <span>Start</span>
+ </button>
+  </div>
+
+</ion-content>
+<popmenu></popmenu>
+<!-- <barcode-scanner-livestream
+      type="code_128"
+      (valueChanges)="onValueChanges($event)"
+      (started)="(onStarted)"
+    ></barcode-scanner-livestream>
+    <div [hidden]="!barcodeValue">
+      {{ barcodeValue }}
+    </div> -->
+  

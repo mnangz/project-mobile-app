@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Sign in visitor</ion-text>
+        </ion-text>
+    </ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="padding-bottom: 50px;">
+  <form [formGroup]="service.form" (submit)="signIn()">
+    <ion-item >
+      <ion-label position="floating" color="secondary">First Name</ion-label>
+      <ion-input type="text" formControlName="first_name"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" color="secondary">Last Name</ion-label>
+      <ion-input type="text" formControlName="last_name"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" color="secondary">Mobile Number</ion-label>
+      <ion-input type="tel" formControlName="mobile"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" color="secondary">Company Name</ion-label>
+      <ion-input type="text" formControlName="company_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="secondary">Address</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="secondary">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input> 
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" color="secondary">ID Number</ion-label>
+      <ion-input type="text" formControlName="id_number"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating" color="secondary">Vehicle Registration</ion-label>
+      <ion-input type="text" formControlName="vehicle_reg"></ion-input>
+    </ion-item>
+    <ion-item style="margin-top: 25px">
+      <ion-label color="secondary">Person Visited</ion-label>
+      <ion-select ok-text="Done" cancel-text="Cancel" formControlName="person_visited">
+        <ion-select-option *ngFor="let employee of employee" value="{{employee._id}}">{{employee.first_name}} {{employee.last_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item style="margin-top: 25px">
+      <ion-label color="secondary">Purpose of visit</ion-label>
+      <ion-select ok-text="Done" cancel-text="Cancel" formControlName="purpose_of_visit">
+        <ion-select-option value="Business">Business</ion-select-option>
+        <ion-select-option value="Personal">Personal</ion-select-option>
+        <ion-select-option value="Delivery">Delivery</ion-select-option>
+        <ion-select-option value="Work">Work</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-row style="padding:10px; margin-top: 20px; margin-bottom: 50px;">
+      <ion-col no-padding>
+        <ion-button type="submit" expand="clear" color="primary" style="width: 100%;" icon-start [disabled]="service.form.invalid">
+          Done
+        </ion-button>
+      </ion-col>
+      <ion-col text-right no-padding>
+        <ion-button expand="clear" color="danger" style="width: 100%;" icon-start (click)="onClear()">
+          Clear
+        </ion-button>
+      </ion-col>    
+    </ion-row>
+    <!-- <ion-button expand="clear" type="submit" color="secondary" [disabled]="!visitorsForm.valid">Sign in</ion-button> -->
+  </form>
+  
+</ion-content>
+<popmenu></popmenu>

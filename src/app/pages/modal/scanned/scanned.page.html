@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button size="small" shape="round" (click)="closeModal()" color="light">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+    	EMPLOYEE SIGN IN
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="badge">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngFor="let b of badge">
+    <div *ngIf="badge.length > 0">
+      <div>
+        <div style="text-align: center;">
+          <img src="./../../../../assets/img/tick-text.png" style="height: 100px; margin-top: 50px;">
+        </div>
+      </div>
+      
+      <!-- <img [src]="value"> -->
+      <form [formGroup]="temperatureForm" (ngSubmit)="signIn()">
+    
+        <div style="margin-top: 10px;">
+          <ion-text>
+            <!-- <ion-text class="fw400" style="font-size: 13px;">{{b.company_name}}</ion-text> -->
+            <p class="fw800" style="font-size: 20px; text-align: center;"><strong>Company ID:</strong> {{b.employee_id}}</p>
+            <p class="fw800" style="font-size: 17px; text-align: center;"><strong>Valid Until:</strong> {{b.expiresAt | date: 'short'}}</p>
+          </ion-text>
+        </div>
+    
+              <ion-item style="margin-top: 45px">
+                <p style="font-size: 13px;">Person's body temperature (in Degrees Celsius)</p>
+                <ion-select ok-text="Done" cancel-text="Cancel" formControlName="temperature" type="number" required>
+                  <ion-select-option value="35.4">35.4</ion-select-option>
+                  <ion-select-option value="35.6">35.6</ion-select-option>
+                  <ion-select-option value="35.8">35.8</ion-select-option>
+                  <ion-select-option value="36.0">36.0</ion-select-option>
+                  <ion-select-option value="36.2">36.2</ion-select-option>
+                  <ion-select-option value="36.4">36.4</ion-select-option>
+                  <ion-select-option value="36.6">36.6</ion-select-option>
+                  <ion-select-option value="36.8">36.8</ion-select-option>
+                  <ion-select-option value="37.0">37.0</ion-select-option>
+                  <ion-select-option value="37.2">37.2</ion-select-option>
+                  <ion-select-option value="37.4">37.4</ion-select-option>
+                  <ion-select-option value="37.6">37.6</ion-select-option>
+                  <ion-select-option value="37.8">37.8</ion-select-option>
+                  <ion-select-option value="38.0">38.0</ion-select-option>
+                </ion-select>
+              </ion-item>
+    
+          <ion-col no-padding>
+            <ion-button type="submit" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 55px;" [disabled]="!temperatureForm.valid" icon-start>
+              Sign In
+            </ion-button>
+  
+            <ion-button (click)="closeModal()" size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-top: 55px;" icon-start>
+              Cancel Sign In
+            </ion-button>
+          </ion-col>
+      </form>
+    </div>
+    
+    <div padding style="margin-top: 150px;" *ngIf="badge.length == 0">
+        <div style="text-align: center;">
+          <img src="./../../../../assets/img/x-text.png" style="height: 100px; margin-top: 50px;">
+        </div>
+      <ion-col no-padding>
+        <ion-button size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-top: 40px;" icon-start>
+          Back to home
+        </ion-button>
+      </ion-col>
+    </div>
+
+  </div>
+
+</ion-content>

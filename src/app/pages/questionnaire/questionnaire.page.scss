@@ -1,0 +1,16 @@
+:host {
+    ion-content {
+        --background: #ccc url("../../../assets/img/qstn.png") no-repeat center center / cover;
+    }
+
+    ion-item {
+        border-radius: 0;
+        border-bottom: 1px dotted var(--ion-color-medium);
+    }
+
+    ion-card {
+        &.no-radius {
+            border-radius: 0;
+        }
+    }
+}

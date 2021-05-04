@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button size="small" shape="round" (click)="closeModal()" color="light">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+    	QUESTIONNAIRE RESPONSE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngFor="let q of questionnaire">
+  <div *ngIf="questionnaire.length > 0">
+    <div>
+      <ion-title no-padding>
+        <ion-text color="light">
+          <ion-text color="primary" class="fw400" style="font-size: 15px;">Company ID:</ion-text><br>
+          <ion-text color="primary" class="fw500">{{q.employee_id}}</ion-text>
+        </ion-text>
+      </ion-title>
+    </div>
+  
+    <div style="padding-top: 25px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Post 14 days self quarantine after wedding/funeral:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.fourteen_days}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Coming from leave or Off shift:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.leave}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Foreign Travel over the past 30days (PCR Mandatory)</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.travel}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Business Trip Between Operations Ngezi/SMC/Harare</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.business}}</ion-text>
+      </ion-text>
+    </div>
+    
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Have been in contact with a confirmed / suspected Covid 19 Case</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.contact}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Have you been tested for Covid-19?</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.tested}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>If yes what was the type of test?</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.testType}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Test result:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.result}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Results verified by:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.verifiedby}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Date of result verification:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.verificationDate}}</ion-text>
+      </ion-text>
+    </div>
+  
+    <ion-col style="padding-bottom: 80px;" *ngIf="staff.isNurse">
+          <ion-button (click)="generateBadge()" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 40px; margin-bottom: 20px;" icon-start>
+            Verify and Issue Badge
+          </ion-button>
+  
+          <ion-button (click)="closeModal()" type="submit" size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-bottom: 40px;" icon-start>
+            Verify and do not Issue Badge
+          </ion-button>
+      </ion-col>
+  </div>
+
+  <div *ngIf="questionnaire.length == 0">
+    <div>
+      <div style="text-align: center;">
+        <img src="./../../../../assets/img/q-text.png" style="height: 100px; margin-top: 50px;">
+      </div>
+    </div>
+    <ion-col no-padding>
+      <ion-button size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-top: 40px;" icon-start>
+        Back to home
+      </ion-button>
+    </ion-col>
+  </div>
+</ion-content>

@@ -1,0 +1,19 @@
+:host {
+    ion-content {
+        // --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
+        --background: #ccc url("../../../assets/img/login.jpg") no-repeat center center / cover;
+    }
+}
+
+.paz {
+    position: relative;
+    z-index: 10;
+}
+
+.wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

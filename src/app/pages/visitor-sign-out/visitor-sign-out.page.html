@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Visitors</ion-text>
+        </ion-text>
+    </ion-title>
+    
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar (ionInput)="filterList($event.target.value)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="color: darkblue;">
+    <ion-refresher-content
+      
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing Visitors...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor="let visitor of visitors">
+
+    <ion-card-content no-padding>
+      <ion-card-title style="padding-bottom: 5px; font-size: 18px; background-color:#2f32a0; color: white; padding: 5px;">
+        {{visitor.first_name}} {{visitor.last_name}}
+      </ion-card-title>
+      <p style="font-size: 13px; padding: 6px;">
+        <strong>Date: </strong>{{visitor.createdAt | date: 'dd/MM/yyyy'}} <br> <strong>Sign in Time:</strong> {{visitor.createdAt | date: 'shortTime'}} 
+        <br> <strong>Pupose of Visit: </strong>{{visitor.purpose_of_visit}}
+      </p>
+      <p style="font-size: 13px; padding: 6px;" >
+        <strong>Visitor Seen: </strong>
+      <span [ngClass]="{
+        'yes' : visitor.visitor_seen == true,
+        'no' : visitor.visitor_seen == false
+     }"> {{visitor.visitor_seen? 'Yes' : "No"}}</span> 
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col no-padding>
+        <ion-button expand="clear" size="small" color="primary" style="width: 100%;" icon-start (click)="presentVisitor(visitor)">
+          <ion-icon name='information'></ion-icon>
+          &nbsp; Info
+        </ion-button>
+      </ion-col>
+      <ion-col text-right no-padding>
+        <ion-button expand="clear" size="small" color="primary" style="width: 100%;" icon-start (click)="signOut(visitor._id)">
+          <ion-icon name='log-out'></ion-icon>
+          &nbsp; Sign Out
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+  
+  
+</ion-content>
+
+<ngx-spinner></ngx-spinner>
+
+<popmenu></popmenu>

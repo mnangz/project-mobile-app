@@ -1,0 +1,109 @@
+<ion-content padding class="animated fadeIn login auth-page" style="padding-top: 100px;">
+  <div class="theme-bg"></div>
+  <div class="wrap">
+
+
+    <ion-card color="light">
+      <!-- <ion-card-header>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-card-title>Card Title</ion-card-title>
+      </ion-card-header> -->
+    
+      <ion-card-content>
+        <div style="text-align: center;">
+          <img src="./../../../assets/img/zimplatslogo.png" style="height: 110px; margin-top: 10px;">
+        </div>
+        <form [formGroup]="onLoginForm" class="list-form" style="padding-top: 20px; color: #2f32a0;">
+          <ion-item style="margin-top: 25px">
+            <ion-label color="primary" position="stacked">
+              <ion-icon color="primary" name="navigate" item-start></ion-icon>
+              Screening Point
+            </ion-label>
+            <ion-select color="primary" ok-text="Select" cancel-text="Cancel" formControlName="location">
+              <ion-select-option value="SMC Truck Stop">SMC Truck Stop</ion-select-option>
+              <ion-select-option value="SMC Main Access">SMC Main Access</ion-select-option>
+              <ion-select-option value="SMC Bus stop Turnstile">SMC Bus stop Turnstile</ion-select-option>
+              <ion-select-option value="Head Office Main Entrance">Head Office Main Entrance</ion-select-option>
+              <ion-select-option value="Mupfure Main Entrance">Mupfure Main Entrance</ion-select-option>
+              <ion-select-option value="Ngezi Conc Main Access">Ngezi Conc Main Access</ion-select-option>
+              <ion-select-option value="Ngezi Conc Admin Access">Ngezi Conc Admin Access</ion-select-option>
+              <ion-select-option value="Ngezi Nothern Main Access">Ngezi Nothern Main Access</ion-select-option>
+              <ion-select-option value="Ngezi Western Main Access">Screening Point 4</ion-select-option>
+              <ion-select-option value="Ngezi Admin Main Access">Ngezi Admin Main Access</ion-select-option>
+              <ion-select-option value="Mupani Main Access">Mupani Main Access</ion-select-option>
+              <ion-select-option value="Bimha Main Access">Bimha Main Access</ion-select-option>
+              <ion-select-option value="Mupfuti Main Access">Mupfuti Main Access</ion-select-option>
+              <ion-select-option value="Rukodzi Main Access">Rukodzi Main Access</ion-select-option>
+              <ion-select-option value="Ngwarati Main Access">Screening Point 5</ion-select-option>
+              <ion-select-option value="Ngezi Engineering Service Main Access">Ngezi Engineering Service Main Access</ion-select-option>
+              <ion-select-option value="Ngezi Transport Services Main Access">Ngezi Transport Services Main Access</ion-select-option>
+              <ion-select-option value="Occupational Health Centre Main Access">Occupational Health Centre Main Access</ion-select-option>
+              <ion-select-option value="Ngezi Projects Lab Main Access">Ngezi Projects Lab Main Access</ion-select-option>
+              <ion-select-option value="Mulota Golf Course Main Access">Mulota Golf Course Main Access</ion-select-option>
+              <ion-select-option value="Eagles Nest Main Access">Eagles Nest Main Access</ion-select-option>
+              <ion-select-option value="Mupani Main Access">Mupani Main Access</ion-select-option>
+              <ion-select-option value="Ngezi Village Main Access">Ngezi Village Main Access</ion-select-option>
+              <ion-select-option value="Sakunda Old Depot Main Access">Sakunda Old Depot Main Access</ion-select-option>
+              <ion-select-option value="Sakunda New Depot Main Access">Sakunda New Depot Main Access</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="onLoginForm.get('location').touched && onLoginForm.get('location').hasError('required')">
+            <ion-text color="warning">
+              Required Field
+            </ion-text>
+          </p>
+
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label color="primary" position="stacked">
+              <ion-icon color="primary" name="mail" item-start></ion-icon>
+              Username
+            </ion-label>
+            <ion-input color="primary" type="username" formControlName="username"></ion-input>
+          </ion-item>
+          <p ion-text class="text08" *ngIf="onLoginForm.get('username').touched && onLoginForm.get('username').hasError('required')">
+            <ion-text color="warning">
+              Required Field
+            </ion-text>
+          </p>
+    
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label color="primary" position="stacked">
+              <ion-icon color="primary" name="lock" item-start></ion-icon>
+              Password
+            </ion-label>
+            <ion-input color="primary" type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
+            <ion-text color="warning">
+              Required Field
+            </ion-text>
+            </p>
+        </form>
+    
+    
+        <div style="margin-top: 50px;">
+          <ion-button icon-left size="medium" expand="full" shape="round" color="primary" (click)="onLogin()" [disabled]="!onLoginForm.valid" tappable>
+            <ion-icon name="log-in"></ion-icon>
+            &nbsp; SIGN IN
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Logo -->
+    <!-- <div class="wrap" padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo" padding></div>
+      <h4 style="margin-top: 10px;">
+        <ion-text color="light" class="fw500">
+          Screening & Access Application
+        </ion-text>
+      </h4>
+    </div> -->
+
+    <!-- Login form -->
+
+
+    <!-- Other links -->
+
+  </div>
+</ion-content>

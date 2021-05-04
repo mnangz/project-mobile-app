@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">VALID QUESTIONNAIRE</ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding style="align-items:center;" *ngIf="questionnaire">
+  <div style="height: 80%; flex-direction: column; align-items:center;" *ngIf="questionnaire.length > 0">
+    <ion-card style="background-color: white;" *ngIf="created_code">
+      <ion-card-header *ngFor="let q of questionnaire" style="text-align: center;">
+        <ion-card-subtitle>Created on: <strong>{{q.date | date: 'dd/MM/yyyy'}}</strong></ion-card-subtitle>
+        <!-- <ion-card-title>Questionnaire ref #: <strong>{{q.employee_id}}</strong></ion-card-title> -->
+        <h3 style="text-align: center;" color="primary"><strong>Questionnaire ref #:</strong> {{q.employee_id}}</h3>
+      </ion-card-header>
+    
+      <ion-card-content *ngFor="let q of questionnaire" style="align-content: center;">
+        <ngx-qrcode
+            [elementType]="elementType"
+            [value]="created_code"
+            [scale]="8"
+            cssClass="aclass"
+            errorCorrectionLevel="L">
+
+
+          </ngx-qrcode>
+        <!-- <div style="text-align: center;">
+          <img src="./../../../assets/img/qr_code.png" style="height: 300px;">
+        </div> -->
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div style="height: 80%; flex-direction: column; align-items:center;" *ngIf="questionnaire.length == 0">
+    <p style="text-align: center;">No valid questionnaire, please fill one in.</p>
+  </div>
+
+</ion-content>
+
+<popmenu></popmenu>

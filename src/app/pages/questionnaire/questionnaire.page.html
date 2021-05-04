@@ -1,0 +1,496 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">QUESTIONNAIRE</ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="staff">
+  <!-- <ion-progress-bar color="success" value="0.5"></ion-progress-bar> -->
+  <div style="text-align: center;">
+    <img src="./../../../assets/img/qstn-logo.png" style="height: 60px; margin-top: 10px;">
+  </div>
+  <div style="text-align: center; color: white;">
+    <p><strong>Screening Point: </strong>{{staff.location}}</p>
+    <p *ngIf="!staff.isNurse"><strong>Quuestionnaire ref #: </strong> {{staff.username}}</p>
+  </div>
+
+  <div padding style="margin-top: 25px;" *ngIf="staff">
+    <form [formGroup]="service.form" (submit)="submit()">
+      <div *ngIf="!staff.isNurse">
+        <ion-input color="primary" type="hidden" formControlName="employee_id" [(ngModel)]="staff.username"></ion-input>
+      </div>
+        
+      <ion-input color="primary" type="hidden" formControlName="location" [(ngModel)]="staff.location"></ion-input>
+      <!-- <ion-card style="background-color: white;" *ngIf="!staff.isEmployee || !staff.isNurse">
+        <ion-card-content>
+          <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Personal Information <span style="color: red;">*</span></p>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                First Name
+              </ion-label>
+              <ion-input color="primary" type="text" formControlName="first_name"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Surname
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-list>
+                <ion-radio-group value="gender">
+                  <p>Gender</p>
+                  <ion-item>
+                    <p>Male</p>
+                    <ion-radio slot="start" value="M"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Female</p>
+                    <ion-radio slot="start" value="F"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Occupation
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Age
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                ID Number
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            '<ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Company
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Dept
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Company Phone Number
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+               Address
+              </ion-label>
+              <ion-textarea color="primary" type="text"></ion-textarea>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Email
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                Mobile Phone Number
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-list>
+                <ion-radio-group value="residence">
+                  <p>Select local residence while at work</p>
+                  <ion-item>
+                    <p>Turf</p>
+                    <ion-radio slot="start" value="Turf"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Ngezi Village</p>
+                    <ion-radio slot="start" value="Ngezi Village"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Mupani</p>
+                    <ion-radio slot="start" value="Mupani"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>KW Village</p>
+                    <ion-radio slot="start" value="KW Village"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Eagles Nest</p>
+                    <ion-radio slot="start" value="Eagles Nest"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>BMR Village</p>
+                    <ion-radio slot="start" value="BMR Village"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Chegutu</p>
+                    <ion-radio slot="start" value="Chegutu"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Norton</p>
+                    <ion-radio slot="start" value="Norton"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Harare</p>
+                    <ion-radio slot="start" value="Harare"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>SMC Village</p>
+                    <ion-radio slot="start" value="SMC Village"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-list>
+                <ion-radio-group value="accomodation">
+                  <p>Type of accomodation</p>
+                  <ion-item>
+                    <p>Single Room</p>
+                    <ion-radio slot="start" value="Single Room"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <p>Sharing</p>
+                    <ion-radio slot="start" value="Sharing"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </ion-item>
+            <ion-item no-padding class="animated fadeInUp">
+              <ion-label position="stacked">
+                If sharing enter the name of your roommate
+              </ion-label>
+              <ion-input color="primary" type="text"></ion-input>
+            </ion-item>
+        </ion-card-content>
+      </ion-card> -->
+
+      <ion-card style="background-color: white;" *ngIf="staff">
+        <ion-card-content *ngIf="!staff.isEmployee">
+          <ion-checkbox type="hidden" formControlName="approved" checked="true"></ion-checkbox>
+          <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Please provide your reference number and temperature reading <span style="color: red;">*</span></p>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="stacked">
+              Company ID
+            </ion-label>
+            <ion-input color="primary" type="text" formControlName="employee_id"></ion-input>
+          </ion-item>
+          <ion-item style="margin-top: 25px">
+            <p style="font-size: 16px;">Temperature (in Degrees Celsius)</p>
+            <ion-select ok-text="Done" cancel-text="Cancel" formControlName="temperature" type="number" required>
+              <ion-select-option value="35.4">35.4</ion-select-option>
+              <ion-select-option value="35.6">35.6</ion-select-option>
+              <ion-select-option value="35.8">35.8</ion-select-option>
+              <ion-select-option value="36.0">36.0</ion-select-option>
+              <ion-select-option value="36.2">36.2</ion-select-option>
+              <ion-select-option value="36.4">36.4</ion-select-option>
+              <ion-select-option value="36.6">36.6</ion-select-option>
+              <ion-select-option value="36.8">36.8</ion-select-option>
+              <ion-select-option value="37.0">37.0</ion-select-option>
+              <ion-select-option value="37.2">37.2</ion-select-option>
+              <ion-select-option value="37.4">37.4</ion-select-option>
+              <ion-select-option value="37.6">37.6</ion-select-option>
+              <ion-select-option value="37.8">37.8</ion-select-option>
+              <ion-select-option value="38.0">38.0</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card style="background-color: white;">
+        <ion-card-content >
+          <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Reason for Screening <span style="color: red;">*</span></p>
+          <ion-item no-padding class="animated fadeInUp">
+            <p>Post 14 days self quarantine after wedding/funeral</p>
+            <ion-checkbox slot="start" formControlName="fourteen_days"></ion-checkbox>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <p>Coming from leave or Off shift</p>
+            <ion-checkbox slot="start" formControlName="leave"></ion-checkbox>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <p>Foreign Travel over the past 30days (PCR Mandatory)</p>
+            <ion-checkbox slot="start" formControlName="travel"></ion-checkbox>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <p>Business Trip Between Operations Ngezi/SMC/Harare</p>
+            <ion-checkbox slot="start" formControlName="business"></ion-checkbox>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <p>Have been in contact with a confirmed / suspected Covid 19 Case</p>
+            <ion-checkbox slot="start" formControlName="contact"></ion-checkbox>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="tested" formControlName="tested">
+                <p>Have you been tested for Covid-19?</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="type of test" formControlName="testType">
+                <p>If yes what was the type of test?</p>
+                <ion-item>
+                  <p>PCR</p>
+                  <ion-radio slot="start" value="PCR"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>Antigen</p>
+                  <ion-radio slot="start" value="Antigen"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="result" formControlName="result">
+                <p>Test result</p>
+                <ion-item>
+                  <p>Positive</p>
+                  <ion-radio slot="start" value="Positive"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>Negative</p>
+                  <ion-radio slot="start" value="Negative"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="stacked">
+             Results verified by
+            </ion-label>
+            <ion-input color="primary" type="text" formControlName="verifiedby"></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="stacked">
+             Date of result verification
+            </ion-label>
+            <ion-input color="primary" type="date" formControlName="verificationDate"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card style="background-color: white;">
+        <ion-card-content >
+          <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Are you suffering from or have you suffered from any of the following symptoms? <span style="color: red;">*</span></p>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Hot Body" formControlName="hotBody">
+                <p>Hot Body</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Headache" formControlName="headache">
+                <p>Headache</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Feeling Weak" formControlName="weak">
+                <p>Feeling Weak</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="General Body Pains" formControlName="bodyPains">
+                <p>General Body Pains</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Do you feel like you want to vomit?" formControlName="nausea">
+                <p>Do you feel like you want to vomit?</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Vomiting" formControlName="vomiting">
+                <p>Vomiting</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Sore Throat" formControlName="soreThroat">
+                <p>Sore Throat</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Cough" formControlName="cough">
+                <p>Cough</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Running Nose" formControlName="nose">
+                <p>Running Nose</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Chest Pains" formControlName="chestPains">
+                <p>Chest Pains</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-list>
+              <ion-radio-group value="Difficulties in breathing" formControlName="breathing">
+                <p>Difficulties in breathing</p>
+                <ion-item>
+                  <p>Yes</p>
+                  <ion-radio slot="start" value="Yes"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <p>No</p>
+                  <ion-radio slot="start" value="No"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="stacked">
+             If you ticked yes on any symptom please indicate the duration
+            </ion-label>
+            <ion-textarea color="primary" type="text" formControlName="duration"></ion-textarea>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-col style="padding-bottom: 80px;" *ngIf="!staff.isNurse">
+        <ion-button type="submit" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 40px; margin-bottom: 60px;" icon-start>
+          SUBMIT
+        </ion-button>
+      </ion-col>
+
+      <ion-col style="padding-bottom: 80px;" *ngIf="staff.isNurse">
+        <ion-button type="submit" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 40px; margin-bottom: 20px;" icon-start>
+          Verify, Issue Badge & Sign In
+        </ion-button>
+
+        <!-- <ion-button type="submit" size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-bottom: 40px;" icon-start>
+          Verify & do not Issue Badge
+        </ion-button> -->
+      </ion-col>
+    </form>
+  </div>
+</ion-content>
+<popmenu></popmenu>

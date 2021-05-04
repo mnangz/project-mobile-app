@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button size="small" shape="round" (click)="closeModal()" color="light">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+    	Information
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- <img [src]="value"> -->
+  <div>
+    <ion-title no-padding>
+      <ion-text color="light">
+        <ion-text color="primary" class="fw400" style="font-size: 15px;">Information For:</ion-text><br>
+        <ion-text color="primary" class="fw500">{{personInfo.first_name}} {{personInfo.last_name}}</ion-text>
+      </ion-text>
+    </ion-title>
+  </div>
+
+  <div style="padding-top: 25px;">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Company Name:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.company_name}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;" *ngIf="personInfo.email">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Email:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.email}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;" *ngIf="personInfo.mobile">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Mobile Number:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.mobile}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Address:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.address}}</ion-text>
+    </ion-text>
+  </div>
+  
+  <div style="padding-top: 15px;">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>ID Number:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.id_number}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;" *ngIf="personInfo.vehicle_reg">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Vehicle Registration:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.vehicle_reg}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Purpose of Visit:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.purpose_of_visit}}</ion-text>
+    </ion-text>
+  </div>
+
+  <!-- <div style="padding-top: 15px;">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Person to be Visited:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.person_visited}}</ion-text>
+    </ion-text>
+  </div> -->
+
+  <div style="padding-top: 15px;" *ngIf="!personInfo.barcode">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Sign in time:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.createdAt | date: 'shortTime'}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;" *ngIf="!personInfo.barcode">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Visitor Seen:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">
+      <span [ngClass]="{
+        'yes' : personInfo.visitor_seen == true,
+        'no' : personInfo.visitor_seen == false
+     }"> {{personInfo.visitor_seen? 'Yes' : "No"}}</span> 
+      </ion-text>
+    </ion-text>
+  </div>
+
+
+  <div style="padding-top: 15px;" *ngIf="personInfo.barcode">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Booking Date:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.visit_date | date: 'dd/MM/yyyy'}}</ion-text>
+    </ion-text>
+  </div>
+
+  <div style="padding-top: 15px;" *ngIf="personInfo.barcode">
+    <ion-text>
+      <ion-text class="fw800" style="font-size: 15px;"><strong>Notes:</strong></ion-text><br>
+      <ion-text class="fw400" style="font-size: 13px;">{{personInfo.notes}}</ion-text>
+    </ion-text>
+  </div>
+
+
+
+</ion-content>

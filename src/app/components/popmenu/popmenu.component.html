@@ -1,0 +1,32 @@
+<ion-fab vertical="bottom" horizontal="center" slot="fixed" class="animated fadeInDown">
+  <ion-fab-button (click)="togglePopupMenu()">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="md-apps"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<div class="popup-menu" *ngIf="staff">
+  <div class="popup-menu-overlay" [ngClass]="{'in': openMenu}"></div>
+  <div class="popup-menu-panel" [ngClass]="{'in': openMenu}">
+    <div class="popup-menu-item" (click)="goToHome()">
+      <ion-icon name="md-home" slot="middle" size="large"></ion-icon>
+      <span>Home</span>
+    </div>
+    <div class="popup-menu-item" (click)="goToManualSearch()" *ngIf="staff.isNurse">
+      <ion-icon name="search" slot="middle" size="large"></ion-icon>
+      <span>Search</span>
+    </div>
+    <div class="popup-menu-item" (click)="goToQuestionnaires()" *ngIf="staff.isNurse">
+      <ion-icon name="list" slot="middle" size="large"></ion-icon>
+      <span>Questionnaires</span>
+    </div>
+    <div class="popup-menu-item" (click)="goToValid()" *ngIf="staff.isEmployee">
+      <ion-icon name="checkmark-circle" slot="middle" size="large"></ion-icon>
+      <span>Valid Questionnaire</span>
+    </div>
+    <div class="popup-menu-item" (click)="goToSearch()" *ngIf="staff.isEntrance">
+      <ion-icon name="search" slot="middle" size="large"></ion-icon>
+      <span>Search</span>
+    </div>
+  </div>
+</div>

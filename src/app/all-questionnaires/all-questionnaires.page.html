@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">QUESTIONNAIRE</ion-text>
+        </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="text-align: center;">
+    <img src="./../../../assets/img/zimplatslogo.png" style="height: 80px; margin-top: 50px;">
+  </div>
+
+  <ion-card>
+    <ion-card-content style="background-color: white;">
+      <ion-text style="text-align: center; margin-bottom: 60px; font-size: 20px;">Press start button to begin the questionnaire</ion-text>
+      <div class="wrap" style="height: 70%; flex-direction: column; margin-top: 30px;">
+        <button class="htbutton" (click)="start()">
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-icon name="list" slot="middle" size="large"></ion-icon><br><br>
+          <span>Start</span>
+       </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<popmenu></popmenu>

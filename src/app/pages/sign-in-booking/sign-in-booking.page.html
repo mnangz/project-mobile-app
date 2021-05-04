@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Bookings</ion-text>
+        </ion-text>
+    </ion-title>
+    
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-searchbar (ionInput)="filterList($event.target.value)"></ion-searchbar>
+    <!-- <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="searchFilter()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing Bookings...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- <div class="wrap" style="height: 100%; flex-direction: column;" *ngIf="empty">
+    <ion-text style="text-align: center; margin-bottom: 60px; font-size: 20px; color: blue;">No bookings found,...pull to refresh</ion-text>
+  </div> -->
+
+  <ion-card *ngFor="let booking of bookings">
+    <ion-card-content no-padding>
+      <ion-card-title style="padding-bottom: 5px; font-size: 18px; background-color:#2f32a0; color: white; padding: 5px;">
+        {{booking.first_name}} {{booking.last_name}}
+      </ion-card-title>
+      <p style="font-size: 12px; padding: 6px;">
+        <strong>Booking #:</strong> {{booking.booking_ref_no}} <br><strong>Date: </strong>{{booking.visit_date | date: 'dd/MM/yyyy'}} <br><strong>Pupose of Visit: </strong>{{booking.purpose_of_visit}}
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col no-padding>
+        <ion-button expand="clear" size="small" color="primary" style="width: 100%;" icon-start (click)="presentBooking(booking)">
+          <ion-icon name='information'></ion-icon>
+          &nbsp; Info
+        </ion-button>
+      </ion-col>
+      <ion-col text-right no-padding>
+        <ion-button expand="clear" size="small" color="primary" style="width: 100%;" icon-start (click)="signIn(booking)">
+          <ion-icon name='log-in'></ion-icon>
+          &nbsp; Sign In
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+  
+  
+</ion-content>
+
+<ngx-spinner></ngx-spinner>
+
+<popmenu></popmenu>
+
+  
