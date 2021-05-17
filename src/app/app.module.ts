@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // Modal Pages
-import { ImagePageModule } from './pages/modal/image/image.module';
 import { SearchFilterPageModule } from './pages/modal/search-filter/search-filter.module';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ScannedPageModule } from './pages/modal/scanned/scanned.module';
@@ -49,7 +48,6 @@ export function jwtOptionsFactory(storage) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ImagePageModule,
     ScannedPageModule,
     QSurveyPageModule,
     SearchFilterPageModule,
