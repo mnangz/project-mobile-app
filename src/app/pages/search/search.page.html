@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button color="light"></ion-menu-button>
+      <ion-back-button defaultHref="manual-search"></ion-back-button>
     </ion-buttons>
     <ion-title>
         <ion-text color="light">
@@ -26,6 +26,10 @@
               Company ID
             </ion-label>
             <ion-input color="primary" type="text" formControlName="employee_id" required></ion-input>
+            <!-- <ion-searchbar type="text" debounce="500" (ionChange)="getBadges($event)"></ion-searchbar>
+            <ion-list *ngIf="isBadgeAvailable">
+                <ion-item *ngFor="let badge of badges">{{ badge.employee_id }}</ion-item>
+            </ion-list> -->
           </ion-item>
       
             <ion-col no-padding>

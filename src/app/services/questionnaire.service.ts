@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Storage } from '@ionic/storage';
-import { Platform } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 
 const TOKEN_KEY = 'access_token';
 
@@ -22,21 +22,43 @@ export class QuestionnaireService {
   url = environment.url;
   token:any;
 
-  constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage, private plt: Platform) { }
+  constructor(private http: HttpClient, private alertController: AlertController,) { }
 
+  showAlert(msg) {
+    let alert = this.alertController.create({
+      message: msg,
+      header: 'Error',
+      buttons: ['OK']
+    });
+    alert.then(alert => alert.present());
+  }
 
   submit(credentials) {
-    return this.http.post(`${this.url}/api/questionnaire/add`, credentials);
+    return this.http.post(`${this.url}/api/questionnaire/add`, credentials)
+    .pipe(
+      catchError(e => {
+        this.showAlert(e.error.msg)
+        throw new Error(e);
+      })
+    );
   }
 
   getQuestionnaire(id){
-    return this.http.get(`${this.url}/api/questionnaire/${id}`);
+    return this.http.get(`${this.url}/api/questionnaire/${id}`, id);
+  }
+
+  getValidQuestionnaire(id){
+    return this.http.get(`${this.url}/api/questionnaire/valid/${id}`, id);
+  }
+
+  qApproved(id){
+    return this.http.patch(`${this.url}/api/questionnaire/approved/${id}`, id);
   }
 
   form: FormGroup = new FormGroup({
     _id: new FormControl(null),
     approved: new FormControl(false),
-    employee_id: new FormControl(''),
+    employee_id: new FormControl(null),
     temperature: new FormControl(null),
     location: new FormControl(''),
     fourteen_days: new FormControl(false),
@@ -68,7 +90,7 @@ export class QuestionnaireService {
     this.form.setValue({
       _id: null,
       approved: false,
-      employee_id: '',
+      employee_id: null,
       temperature: null,
       location: '',
       fourteen_days: false,

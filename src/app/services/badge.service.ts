@@ -33,6 +33,10 @@ export class BadgeService {
     return this.http.get(`${this.url}/api/badge/${id}`);
   }
 
+  getAllBadges(){
+    return this.http.get(`${this.url}/api/badges`);
+  }
+
   form: FormGroup = new FormGroup({
     _id: new FormControl(null),
     employee_id: new FormControl(''),

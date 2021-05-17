@@ -43,20 +43,36 @@
     
               <ion-item style="margin-top: 45px">
                 <p style="font-size: 13px;">Person's body temperature (in Degrees Celsius)</p>
-                <ion-select ok-text="Done" cancel-text="Cancel" formControlName="temperature" type="number" required>
+                <ion-select ok-text="Select" cancel-text="Cancel" formControlName="temperature" type="number" required>
+                  <ion-select-option value="35.1">35.1</ion-select-option>
+                  <ion-select-option value="35.2">35.2</ion-select-option>
+                  <ion-select-option value="35.3">35.3</ion-select-option>
                   <ion-select-option value="35.4">35.4</ion-select-option>
+                  <ion-select-option value="35.5">35.5</ion-select-option>
                   <ion-select-option value="35.6">35.6</ion-select-option>
+                  <ion-select-option value="35.7">35.7</ion-select-option>
                   <ion-select-option value="35.8">35.8</ion-select-option>
+                  <ion-select-option value="35.9">35.9</ion-select-option>
                   <ion-select-option value="36.0">36.0</ion-select-option>
+                  <ion-select-option value="36.1">36.1</ion-select-option>
                   <ion-select-option value="36.2">36.2</ion-select-option>
+                  <ion-select-option value="36.3">36.3</ion-select-option>
                   <ion-select-option value="36.4">36.4</ion-select-option>
+                  <ion-select-option value="36.5">36.5</ion-select-option>
                   <ion-select-option value="36.6">36.6</ion-select-option>
+                  <ion-select-option value="36.7">36.7</ion-select-option>
                   <ion-select-option value="36.8">36.8</ion-select-option>
+                  <ion-select-option value="36.9">36.9</ion-select-option>
                   <ion-select-option value="37.0">37.0</ion-select-option>
+                  <ion-select-option value="37.1">37.1</ion-select-option>
                   <ion-select-option value="37.2">37.2</ion-select-option>
+                  <ion-select-option value="37.3">37.3</ion-select-option>
                   <ion-select-option value="37.4">37.4</ion-select-option>
+                  <ion-select-option value="37.5">37.5</ion-select-option>
                   <ion-select-option value="37.6">37.6</ion-select-option>
+                  <ion-select-option value="37.7">37.7</ion-select-option>
                   <ion-select-option value="37.8">37.8</ion-select-option>
+                  <ion-select-option value="37.9">37.9</ion-select-option>
                   <ion-select-option value="38.0">38.0</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -67,13 +83,13 @@
             </ion-button>
   
             <ion-button (click)="closeModal()" size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-top: 55px;" icon-start>
-              Cancel Sign In
+              Do not Sign In
             </ion-button>
           </ion-col>
       </form>
     </div>
     
-    <div padding style="margin-top: 150px;" *ngIf="badge.length == 0">
+    <!-- <div padding style="margin-top: 150px;" *ngIf="badge.length == 0">
         <div style="text-align: center;">
           <img src="./../../../../assets/img/x-text.png" style="height: 100px; margin-top: 50px;">
         </div>
@@ -82,7 +98,7 @@
           Back to home
         </ion-button>
       </ion-col>
-    </div>
+    </div> -->
 
   </div>
 

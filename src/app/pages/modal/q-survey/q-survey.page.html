@@ -91,16 +91,139 @@
         <ion-text class="fw400" style="font-size: 13px;">{{q.verificationDate}}</ion-text>
       </ion-text>
     </div>
-  
-    <ion-col style="padding-bottom: 80px;" *ngIf="staff.isNurse">
-          <ion-button (click)="generateBadge()" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 40px; margin-bottom: 20px;" icon-start>
-            Verify and Issue Badge
-          </ion-button>
-  
-          <ion-button (click)="closeModal()" type="submit" size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-bottom: 40px;" icon-start>
-            Verify and do not Issue Badge
-          </ion-button>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Hot Body:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.hotBody}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Headache:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.headache}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Weak:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.weak}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Body Pains:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.bodyPains}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Nausea:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.nausea}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Are you vomiting:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.vomiting}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Sore Throat:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.soreThroat}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Are you coughing:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.cough}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Running Nose:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.nose}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Chest Pains:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.chestPains}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Struggle Breathing:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.breathing}}</ion-text>
+      </ion-text>
+    </div>
+
+    <div style="padding-top: 15px;">
+      <ion-text>
+        <ion-text class="fw800" style="font-size: 15px;"><strong>Duration of Symptoms:</strong></ion-text><br>
+        <ion-text class="fw400" style="font-size: 13px;">{{q.duration}}</ion-text>
+      </ion-text>
+    </div>
+
+    <form [formGroup]="temperatureForm" (ngSubmit)="getConsent()">
+      <ion-item style="margin-top: 45px">
+        <p style="font-size: 13px;">Person's body temperature (in Degrees Celsius)</p>
+        <ion-select ok-text="Select" cancel-text="Cancel" formControlName="temperature" type="number" required>
+          <ion-select-option value="35.1">35.1</ion-select-option>
+          <ion-select-option value="35.2">35.2</ion-select-option>
+          <ion-select-option value="35.3">35.3</ion-select-option>
+          <ion-select-option value="35.4">35.4</ion-select-option>
+          <ion-select-option value="35.5">35.5</ion-select-option>
+          <ion-select-option value="35.6">35.6</ion-select-option>
+          <ion-select-option value="35.7">35.7</ion-select-option>
+          <ion-select-option value="35.8">35.8</ion-select-option>
+          <ion-select-option value="35.9">35.9</ion-select-option>
+          <ion-select-option value="36.0">36.0</ion-select-option>
+          <ion-select-option value="36.1">36.1</ion-select-option>
+          <ion-select-option value="36.2">36.2</ion-select-option>
+          <ion-select-option value="36.3">36.3</ion-select-option>
+          <ion-select-option value="36.4">36.4</ion-select-option>
+          <ion-select-option value="36.5">36.5</ion-select-option>
+          <ion-select-option value="36.6">36.6</ion-select-option>
+          <ion-select-option value="36.7">36.7</ion-select-option>
+          <ion-select-option value="36.8">36.8</ion-select-option>
+          <ion-select-option value="36.9">36.9</ion-select-option>
+          <ion-select-option value="37.0">37.0</ion-select-option>
+          <ion-select-option value="37.1">37.1</ion-select-option>
+          <ion-select-option value="37.2">37.2</ion-select-option>
+          <ion-select-option value="37.3">37.3</ion-select-option>
+          <ion-select-option value="37.4">37.4</ion-select-option>
+          <ion-select-option value="37.5">37.5</ion-select-option>
+          <ion-select-option value="37.6">37.6</ion-select-option>
+          <ion-select-option value="37.7">37.7</ion-select-option>
+          <ion-select-option value="37.8">37.8</ion-select-option>
+          <ion-select-option value="37.9">37.9</ion-select-option>
+          <ion-select-option value="38.0">38.0</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-col style="padding-bottom: 80px;" *ngIf="staff.isNurse">
+        <ion-button type="submit" size="medium" expand="full" shape="round" color="primary" style="width: 100%; margin-top: 40px; margin-bottom: 20px;" icon-start>
+          Submit & Sign In
+        </ion-button>
+
+        <ion-button (click)="closeModalAndApprove()" type="submit" size="medium" expand="full" shape="round" color="danger" style="width: 100%; margin-bottom: 40px;" icon-start>
+          Do not Sign In
+        </ion-button>
       </ion-col>
+    </form>
+
   </div>
 
   <div *ngIf="questionnaire.length == 0">

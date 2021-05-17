@@ -1,7 +1,10 @@
-<ion-header>
+<ion-header *ngIf="staff">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button color="light"></ion-menu-button>
+    <ion-buttons slot="start" *ngIf="staff.isNurse">
+      <ion-back-button defaultHref="all-questionnaires"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="staff.isEmployee">
+      <ion-back-button defaultHref="home-result"></ion-back-button>
     </ion-buttons>
     <ion-title>
         <ion-text color="light">
@@ -11,205 +14,68 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding *ngIf="staff">
+<ion-content padding *ngIf="staff || companyId">
   <!-- <ion-progress-bar color="success" value="0.5"></ion-progress-bar> -->
   <div style="text-align: center;">
     <img src="./../../../assets/img/qstn-logo.png" style="height: 60px; margin-top: 10px;">
   </div>
   <div style="text-align: center; color: white;">
     <p><strong>Screening Point: </strong>{{staff.location}}</p>
-    <p *ngIf="!staff.isNurse"><strong>Quuestionnaire ref #: </strong> {{staff.username}}</p>
+    <p *ngIf="!staff.isNurse"><strong>Questionnaire ref #: </strong> {{staff.username}}</p>
   </div>
 
   <div padding style="margin-top: 25px;" *ngIf="staff">
-    <form [formGroup]="service.form" (submit)="submit()">
-      <div *ngIf="!staff.isNurse">
+    <form [formGroup]="service.form" (submit)="checkForQuestionnaire()">
+      <div *ngIf="staff.isEmployee">
         <ion-input color="primary" type="hidden" formControlName="employee_id" [(ngModel)]="staff.username"></ion-input>
       </div>
         
       <ion-input color="primary" type="hidden" formControlName="location" [(ngModel)]="staff.location"></ion-input>
-      <!-- <ion-card style="background-color: white;" *ngIf="!staff.isEmployee || !staff.isNurse">
-        <ion-card-content>
-          <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Personal Information <span style="color: red;">*</span></p>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                First Name
-              </ion-label>
-              <ion-input color="primary" type="text" formControlName="first_name"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Surname
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-list>
-                <ion-radio-group value="gender">
-                  <p>Gender</p>
-                  <ion-item>
-                    <p>Male</p>
-                    <ion-radio slot="start" value="M"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Female</p>
-                    <ion-radio slot="start" value="F"></ion-radio>
-                  </ion-item>
-                </ion-radio-group>
-              </ion-list>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Occupation
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Age
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                ID Number
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            '<ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Company
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Dept
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Company Phone Number
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-               Address
-              </ion-label>
-              <ion-textarea color="primary" type="text"></ion-textarea>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Email
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                Mobile Phone Number
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-list>
-                <ion-radio-group value="residence">
-                  <p>Select local residence while at work</p>
-                  <ion-item>
-                    <p>Turf</p>
-                    <ion-radio slot="start" value="Turf"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Ngezi Village</p>
-                    <ion-radio slot="start" value="Ngezi Village"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Mupani</p>
-                    <ion-radio slot="start" value="Mupani"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>KW Village</p>
-                    <ion-radio slot="start" value="KW Village"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Eagles Nest</p>
-                    <ion-radio slot="start" value="Eagles Nest"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>BMR Village</p>
-                    <ion-radio slot="start" value="BMR Village"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Chegutu</p>
-                    <ion-radio slot="start" value="Chegutu"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Norton</p>
-                    <ion-radio slot="start" value="Norton"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Harare</p>
-                    <ion-radio slot="start" value="Harare"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>SMC Village</p>
-                    <ion-radio slot="start" value="SMC Village"></ion-radio>
-                  </ion-item>
-                </ion-radio-group>
-              </ion-list>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-list>
-                <ion-radio-group value="accomodation">
-                  <p>Type of accomodation</p>
-                  <ion-item>
-                    <p>Single Room</p>
-                    <ion-radio slot="start" value="Single Room"></ion-radio>
-                  </ion-item>
-                  <ion-item>
-                    <p>Sharing</p>
-                    <ion-radio slot="start" value="Sharing"></ion-radio>
-                  </ion-item>
-                </ion-radio-group>
-              </ion-list>
-            </ion-item>
-            <ion-item no-padding class="animated fadeInUp">
-              <ion-label position="stacked">
-                If sharing enter the name of your roommate
-              </ion-label>
-              <ion-input color="primary" type="text"></ion-input>
-            </ion-item>
-        </ion-card-content>
-      </ion-card> -->
+
 
       <ion-card style="background-color: white;" *ngIf="staff">
-        <ion-card-content *ngIf="!staff.isEmployee">
-          <ion-checkbox type="hidden" formControlName="approved" checked="true"></ion-checkbox>
+        <ion-card-content *ngIf="staff.isNurse">
           <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Please provide your reference number and temperature reading <span style="color: red;">*</span></p>
           <ion-item no-padding class="animated fadeInUp">
             <ion-label position="stacked">
               Company ID
             </ion-label>
-            <ion-input color="primary" type="text" formControlName="employee_id"></ion-input>
+            <ion-input color="primary" type="text" formControlName="employee_id" [(ngModel)]="companyId"></ion-input>
+            <ion-icon name="md-barcode" slot="end" (click)="scanId()"></ion-icon>
           </ion-item>
           <ion-item style="margin-top: 25px">
             <p style="font-size: 16px;">Temperature (in Degrees Celsius)</p>
             <ion-select ok-text="Done" cancel-text="Cancel" formControlName="temperature" type="number" required>
-              <ion-select-option value="35.4">35.4</ion-select-option>
-              <ion-select-option value="35.6">35.6</ion-select-option>
-              <ion-select-option value="35.8">35.8</ion-select-option>
-              <ion-select-option value="36.0">36.0</ion-select-option>
-              <ion-select-option value="36.2">36.2</ion-select-option>
-              <ion-select-option value="36.4">36.4</ion-select-option>
-              <ion-select-option value="36.6">36.6</ion-select-option>
-              <ion-select-option value="36.8">36.8</ion-select-option>
-              <ion-select-option value="37.0">37.0</ion-select-option>
-              <ion-select-option value="37.2">37.2</ion-select-option>
-              <ion-select-option value="37.4">37.4</ion-select-option>
-              <ion-select-option value="37.6">37.6</ion-select-option>
-              <ion-select-option value="37.8">37.8</ion-select-option>
-              <ion-select-option value="38.0">38.0</ion-select-option>
+              <ion-select-option value="35.1">35.1</ion-select-option>
+                  <ion-select-option value="35.2">35.2</ion-select-option>
+                  <ion-select-option value="35.3">35.3</ion-select-option>
+                  <ion-select-option value="35.4">35.4</ion-select-option>
+                  <ion-select-option value="35.5">35.5</ion-select-option>
+                  <ion-select-option value="35.6">35.6</ion-select-option>
+                  <ion-select-option value="35.7">35.7</ion-select-option>
+                  <ion-select-option value="35.8">35.8</ion-select-option>
+                  <ion-select-option value="35.9">35.9</ion-select-option>
+                  <ion-select-option value="36.0">36.0</ion-select-option>
+                  <ion-select-option value="36.1">36.1</ion-select-option>
+                  <ion-select-option value="36.2">36.2</ion-select-option>
+                  <ion-select-option value="36.3">36.3</ion-select-option>
+                  <ion-select-option value="36.4">36.4</ion-select-option>
+                  <ion-select-option value="36.5">36.5</ion-select-option>
+                  <ion-select-option value="36.6">36.6</ion-select-option>
+                  <ion-select-option value="36.7">36.7</ion-select-option>
+                  <ion-select-option value="36.8">36.8</ion-select-option>
+                  <ion-select-option value="36.9">36.9</ion-select-option>
+                  <ion-select-option value="37.0">37.0</ion-select-option>
+                  <ion-select-option value="37.1">37.1</ion-select-option>
+                  <ion-select-option value="37.2">37.2</ion-select-option>
+                  <ion-select-option value="37.3">37.3</ion-select-option>
+                  <ion-select-option value="37.4">37.4</ion-select-option>
+                  <ion-select-option value="37.5">37.5</ion-select-option>
+                  <ion-select-option value="37.6">37.6</ion-select-option>
+                  <ion-select-option value="37.7">37.7</ion-select-option>
+                  <ion-select-option value="37.8">37.8</ion-select-option>
+                  <ion-select-option value="37.9">37.9</ion-select-option>
+                  <ion-select-option value="38.0">38.0</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-card-content>
@@ -253,7 +119,7 @@
               </ion-radio-group>
             </ion-list>
           </ion-item>
-          <ion-item no-padding class="animated fadeInUp">
+          <ion-item no-padding class="animated fadeInUp" *ngIf="service.form.value.tested === 'Yes'">
             <ion-list>
               <ion-radio-group value="type of test" formControlName="testType">
                 <p>If yes what was the type of test?</p>
@@ -268,7 +134,7 @@
               </ion-radio-group>
             </ion-list>
           </ion-item>
-          <ion-item no-padding class="animated fadeInUp">
+          <ion-item no-padding class="animated fadeInUp" *ngIf="service.form.value.tested === 'Yes'">
             <ion-list>
               <ion-radio-group value="result" formControlName="result">
                 <p>Test result</p>
@@ -283,13 +149,13 @@
               </ion-radio-group>
             </ion-list>
           </ion-item>
-          <ion-item no-padding class="animated fadeInUp">
+          <ion-item no-padding class="animated fadeInUp" *ngIf="service.form.value.tested === 'Yes'">
             <ion-label position="stacked">
              Results verified by
             </ion-label>
             <ion-input color="primary" type="text" formControlName="verifiedby"></ion-input>
           </ion-item>
-          <ion-item no-padding class="animated fadeInUp">
+          <ion-item no-padding class="animated fadeInUp" *ngIf="service.form.value.tested === 'Yes'">
             <ion-label position="stacked">
              Date of result verification
             </ion-label>
@@ -471,6 +337,16 @@
              If you ticked yes on any symptom please indicate the duration
             </ion-label>
             <ion-textarea color="primary" type="text" formControlName="duration"></ion-textarea>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card style="background-color: white;" *ngIf="staff">
+        <ion-card-content *ngIf="!staff.isEmployee">
+          <p style="font-size: 16px; color: #2f32a0; margin-bottom: 10px;">Approve this questionnaire? <span style="color: red;">*</span></p>
+          <ion-item no-padding class="animated fadeInUp">
+            <p>Approved</p>
+            <ion-checkbox slot="start" formControlName="approved"></ion-checkbox>
           </ion-item>
         </ion-card-content>
       </ion-card>

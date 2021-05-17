@@ -19,6 +19,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AceessLogService } from 'src/app/services/aceess-log.service';
 import { BadgeService } from 'src/app/services/badge.service';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
 const TOKEN_KEY = 'access_token';
 
@@ -38,6 +39,8 @@ export class ScannedPage implements OnInit {
   isDataAvailable:boolean = false;
   temperatureForm: FormGroup;
   badge: any;
+  scannedCode = null;
+  qrOptions: BarcodeScannerOptions;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -55,15 +58,14 @@ export class ScannedPage implements OnInit {
     private spinner: NgxSpinnerService,
     public employeeService: EmployeesService,
     private formBuilder: FormBuilder,
+    private barcodeScanner: BarcodeScanner,
     private plt: Platform
   ) { 
-    
+    this.qrOptions = { prompt: 'Scan QR Code for consent', resultDisplayDuration: 1500, showTorchButton : true, disableSuccessBeep: false };
   }
 
   async ngOnInit() {
     await this.getStaff();
-    // await this.getEmployee();
-    // await this.fetchInfo();
 
     this.info = this.sanitizer.bypassSecurityTrustStyle(this.value);
     this.personInfo = await JSON.parse(this.info.changingThisBreaksApplicationSecurity);
@@ -135,13 +137,48 @@ export class ScannedPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  // async getConsent(){
+  //   await this.barcodeScanner.scan(this.qrOptions)
+  //     .then(barcodeData => {
+
+  //       if(this.personInfo.employee_id === barcodeData.text) {
+  //         this.signIn();
+  //       }else{
+  //         this.incorrectBadge();
+  //       }
+        
+  //      })
+  //      .catch(err => {
+  //       console.log('Error', err);
+  //     });
+  // }
+
+  async incorrectBadge() {
+    const alert = await this.alertCtrl.create({
+      header: 'Authorization failed',
+      message: 'This QR-Code does not match with the badge.',
+      buttons: [
+         {
+          text: 'Ok',
+          handler: async () => {
+
+            this.closeModal();
+      
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   async notFound() {
     const alert = await this.alertCtrl.create({
       header: 'Not Found',
       message: 'This badge has not been found',
       buttons: [
          {
-          text: 'Confirm',
+          text: 'Ok',
           handler: async () => {
 
             this.closeModal();
@@ -204,7 +241,7 @@ export class ScannedPage implements OnInit {
               duration: 2000,
               position: 'top'
             });
-
+            this.closeModal();
             toast.present();
           });
         }

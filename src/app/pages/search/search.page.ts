@@ -30,8 +30,9 @@ export class SearchPage implements OnInit {
 
   staff:any;
   companyIdForm: FormGroup;
-  badge: any;
   info: any;
+  isBadgeAvailable = false;
+  badges: any;
 
   empInfo = null;
 
@@ -108,5 +109,33 @@ export class SearchPage implements OnInit {
       return await modal.present();
     });
   }
+
+  async initializeBadges(){
+    await this.service.getAllBadges()
+    .subscribe(res => {
+      this.badges = res;
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  getBadges(ev: any) {
+    // Reset badges back to all of the badges
+    this.initializeBadges();
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the badges
+    if (val && val.trim() !== '') {
+        this.isBadgeAvailable = true;
+        this.badges = this.badges.filter((badge) => {
+            return (badge.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+    } else {
+        this.isBadgeAvailable = false;
+    }
+  }
+
 
 }
